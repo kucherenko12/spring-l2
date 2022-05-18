@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Found items</title>
+    
+    <style>
+    
+      table.tableClass th, table.tableClass td {padding: 5px;}
+      .row  {font-style: italic;}
+      .even-row {color: black;}
+    </style>
+    
+  </head>
+  <body>
+	<form action="/">hello, <span th:text="${username}"/> <input type="submit" value="Log out"></form>
+	
+	<form action="add" method="POST">
+		Add new item - name:
+		<input type="text" name = "addNewItemName">
+		 kewords:
+		<input type="text" name = "stringAddNewItemKeywords">
+		<input type="submit" value="Add">
+	</form>
+	
+	<form action="delete" method="POST">
+		Delete item - ID:
+		<input type="text" name = "deleteItemID">
+		<input type="submit" value="Delete">
+	</form>
+	
+	<form action="view">
+		Find by keywords - kewords:
+		<input type="text" name = "stringSearchByKeywords">
+		<input type="submit" value="Find">
+	</form>
+
+	<a>Current keywords: </a>
+    <tr th:each="keyword : ${keywords}" >
+        <td class="align-middle" th:text="${keyword}"></td>
+    </tr>
+
+	<span th:each="keyword, state : ${keywords}"/><span th:text="${keyword}"/> </span>
+        
+
+        
+    <table border="1" class="tableClass">
+        <tr>
+          <th>No</th>
+          <th>Name</th>
+          <th>Founder username</th>
+          <th>keywords</th>
+          
+        </tr>
+        <tr th:each="lostElement, state : ${lostElements}"
+                       class="row" th:classappend="${state.odd} ? 'odd-row' : 'even-row'">
+          <td th:utext="${lostElement.number}">No</td>
+          <td th:utext="${lostElement.name}">name</td>
+          <td th:utext="${lostElement.founderUsername}">founderUsername</td>  
+          <td th:utext="${lostElement.keywords.toString()}">keywords</td>  
+        </tr>
+        
+    </table>
+  </body>
+</html> 
